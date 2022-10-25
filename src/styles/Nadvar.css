@@ -1,0 +1,44 @@
+.navbar {
+  flex: 1;
+  justify-content: space-between;
+  align-items: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(115, 169, 199);
+  height: 50px;
+  width: 100%;
+  z-index: 10;
+  transition: top 0.2s linear;
+}
+.nav-link {
+  color: rgb(34, 91, 124);
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+}
+.container-fluid {
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+}
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 700px;
+}
+.btn {
+  border-color: #3498db;
+  color: #fff;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+.btn:hover {
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+}
+.button{
+  color: white;
+  text-decoration: none;
+}
