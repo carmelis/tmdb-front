@@ -4,6 +4,7 @@ import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import Card from "./Card";
 import useDrag from "../hooks/useDrag";
 
+
 function onWheel(apiObj, ev) {
   const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;
 
@@ -19,8 +20,10 @@ function onWheel(apiObj, ev) {
   }
 }
 
-const Carousel = ({ movies }) => {
+const Carousel = ({ movies, series, buscador , favoritos}) => {
   // NOTE: for drag by mouse
+  const data = movies || series || buscador || favoritos
+
   const { dragStart, dragStop, dragMove, dragging } = useDrag();
   const handleDrag =
     ({ scrollContainer }) =>
@@ -41,12 +44,17 @@ const Carousel = ({ movies }) => {
           onWheel={onWheel}
           itemClassName="carouselContainer"
         >
-          {movies.map((movie) => (
+          {data.map((movie) => (
             <Card
             key={movie.title}
-            title={movie.title}
+            title={movie.title || movie.name} 
             description={movie.description}
             imageUrl={movie.imageUrl}
+            popularity={movie.popularity}
+            release_date={movie.release_date}
+            original_language={movie.original_language}
+            vote_average={movie.vote_average}
+            favoritos={favoritos}
           />
           ))}
         </ScrollMenu>

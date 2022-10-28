@@ -2,16 +2,12 @@ import {useState ,React } from 'react'
 import "../../styles/Login.css"
 import axios from 'axios';
 import { useAuthenticationData } from '../../contexts/authentication';
-import { useNavigate } from 'react-router-dom';
-function Login() {
-const navigate =useNavigate()
-  const [username, setUsername] = useState("")
+function Signin() {
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const {setAuthenticationData} = useAuthenticationData()
-  const handleUsername = (evento) => {
-    setUsername(evento.target.value);
-  };
+
 
   const handleEmail = (evento) => {
     setEmail(evento.target.value);
@@ -24,20 +20,14 @@ const navigate =useNavigate()
 const handleSubmit = (evento)=>{
   evento.preventDefault()
  // console.log(username)
- axios.post("http://localhost:3001/api/sigup", {username, email, password}).then((response)=>{
+ axios.post("http://localhost:3001/api/sigin", { email, password}).then((response)=>{
     setAuthenticationData(response.data)
-    navigate("/")
-  }).catch((err)=>alert(err))
-  
+  })
 }
 
   return (
     <div class="form"> 
       <form role="form">
-      <div class="form-group">
-      <label for="email">Username:</label>
-      <input onChange={handleUsername} type="Username:" class="form-control" id="email"></input>
-    </div>
       <br></br>
     <div class="form-group">
       <label for="email">Email address:</label>
@@ -56,4 +46,4 @@ const handleSubmit = (evento)=>{
   )
 }
 
-export default Login
+export default Signin;

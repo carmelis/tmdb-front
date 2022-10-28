@@ -1,16 +1,18 @@
 import "../../App.css";
 import Carousel from "../../components/Carousel";
-import useGetSeries from "../../queries/useGetSeries";
+import useGetBuscador from "../../queries/useGetBuscador";
 import { useEffect, useMemo } from "react";
-import "../../services/tv";
+import { useParams } from "react-router-dom";
+import hanndleSubmit from "../../components/Nadvar"
+function Buscador(props) {
+  const params = useParams()
+  const buscador2 = params.buscador;
 
-function Series() {
-  const { data, isLoading, isError } = useGetSeries();
-  console.log(data);
-  const series = useMemo(
+  const { data } = useGetBuscador(buscador2);
+  const buscador = useMemo(
     () =>
       data?.data?.results?.map((film) => ({
-        name: film.name,
+        title: film.title || film.name,
         description: film.overview,
         imageUrl: "https://www.themoviedb.org/t/p/original" + film.poster_path,
         original_language: "Idioma: " + film.original_language,
@@ -19,14 +21,16 @@ function Series() {
       })),
     [data?.data]
   );
-
+  useEffect(() => {
+    console.log("data", data)
+  }, [data])
   return (
     <div className="App">
       <header className="App-header">
-        {series?.length > 0 && <Carousel series={series} />}
+        {buscador?.length > 0 && <Carousel buscador={buscador} />}
       </header>
     </div>
   );
 }
 
-export default Series;
+export default Buscador;

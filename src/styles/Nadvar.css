@@ -1,15 +1,16 @@
 .navbar {
   flex: 1;
-  justify-content: space-between;
+  justify-content: center;
   align-items: space-between;
   position: fixed;
   top: 0;
   left: 0;
   background-color: rgb(115, 169, 199);
-  height: 50px;
+  height: 30px;
   width: 100%;
   z-index: 10;
   transition: top 0.2s linear;
+  border-radius: 5px;
 }
 .nav-link {
   color: rgb(34, 91, 124);
@@ -34,6 +35,7 @@
   box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
+  border-radius: 5px;
 }
 .btn:hover {
   box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
@@ -41,4 +43,7 @@
 .button{
   color: white;
   text-decoration: none;
+}
+.nombre{
+  top: 30px;
 }

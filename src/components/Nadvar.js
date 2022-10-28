@@ -1,64 +1,90 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthenticationData } from "../contexts/authentication";
+import useGetBuscador from "../queries/useGetBuscador";
+import Buscador from "../screens/Buscador/Buscador";
 import movies from "../screens/Movies/Movies";
 import "../styles/Nadvar.css";
+import { getBuscador } from "../services/buscador";
 
 const Navbar = () => {
-  const {authenticationData} = useAuthenticationData()
+  const { authenticationData, setAuthenticationData } = useAuthenticationData();
+  const navigate = useNavigate();
+  const [buscador, setBuscador] = useState("");
+
+  const handlerBuscador = (evento) => {
+    setBuscador(evento.target.value);
+  };
+
+  const handleSubmit = (evento) => {
+    evento.preventDefault()
+    //console.log("buscador", buscador);
+    navigate(`/buscador/${buscador}`);
+  }
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
 
-          <Link to="/">
-          <a class="navbar-brand nav-link" href="#">
-            TMDB
-          </a>
-          </Link>
-
           <div class="navbar-nav">
-            <Link to="/movies" >
-            <a class="nav-link" href="">
-              Peliculas
-            </a>
+            <Link to="/movies">
+              <a class="nav-link" href="">
+                Peliculas
+              </a>
             </Link>
 
             <Link to="series">
-            <a class="nav-link" href="#">
-              Series
-            </a>
+              <a class="nav-link" href="#">
+                Series
+              </a>
             </Link>
 
-            <Link to="favoritos">
-            <a class="nav-link" href="#">
-              Favoritos
-            </a>
+            <Link to="favorites">
+              <a class="nav-link" href="#">
+                Favoritos
+              </a>
             </Link>
 
-            <a>
-            <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar"></input>
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+            <form onSubmit={handleSubmit} class="d-flex" role="search">
+              <input
+                onChange={handlerBuscador}
+                class="form-control me-2"
+                type="search"
+                placeholder="Buscar"
+                aria-label="Buscar"
+              ></input>
+              <button class="btn btn-outline-success" type="submit">
+                Buscar
+              </button>
             </form>
-            </a>
           </div>
 
+          {/* aca voy a ahcer un condicional que si el usuario existe, lo deje guardado y si no existe, diga Sign up*/}
 
-      {/* aca voy a ahcer un condicional que si el usuario existe, lo deje guardado y si no existe, diga login*/}
-
-      <div className="navbar-item navbar-end">
-        {!!authenticationData ? (
-          <p className="has-text-white">{authenticationData.user.username}</p>
-        ) : (
-          <Link
-            to="/login"
-            className="button"
-            >
-            <strong>Sign up</strong>
-          </Link>
-         )} 
-            </div>
-      </div>
+          <div className="navbar-item navbar-end">
+            {!!authenticationData ? (
+              <>
+                <p class="nombre" className="has-text-white">
+                  {authenticationData.user.username}
+                </p>
+                <button onClick={() => setAuthenticationData(null)} class="btn">
+                  {" "}
+                  Log out
+                </button>
+              </>
+            ) : (
+              <>
+              <Link to="/login" className="button">
+                <strong>Sign up</strong>
+              </Link>
+              <Link to="/signin">
+              <strong>Sign in</strong>
+              </Link>
+              </>
+            )}
+          </div>
+        </div>
       </nav>
     </div>
   );

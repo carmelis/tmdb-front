@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 
 const PermissionContext = React.createContext({
-  authenticationData: undefined,
+  //authenticationData: undefined,
   // eslint-disable-next-line no-empty-function
   setAuthenticationData: () => {},
 });
@@ -23,6 +23,7 @@ export const AuthenticationProvider = ({ children }) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(authData));
     setAuthData(authData);
   }, []);
+
   return (
     <PermissionContext.Provider
       value={{ authenticationData, setAuthenticationData }}
