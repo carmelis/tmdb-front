@@ -4,16 +4,17 @@ import { useEffect, useMemo, useState } from "react";
 import { useAuthenticationData } from "../../contexts/authentication";
 import axios from "axios";
 function Favoritos() {
-  const authenticationData = useAuthenticationData()
-  const [favorito, setFavorito]= useState([])
-  console.log(authenticationData)
+  const authenticationData = useAuthenticationData();
+  const [favorito, setFavorito] = useState([]);
+  console.log(authenticationData);
   useEffect(() => {
-    if(!authenticationData.authenticationData?.user?.id)return
+    if (!authenticationData.authenticationData?.user?.id) return;
     axios
-      .get(`http://localhost:3001/api/favorites/${authenticationData.authenticationData?.user?.id}`)
-      .then((favorites) =>  setFavorito(favorites.data.favoritos));
-     
-  },[]);
+      .get(
+        `http://localhost:3001/api/favorites/${authenticationData.authenticationData?.user?.id}`
+      )
+      .then((favorites) => setFavorito(favorites.data.favoritos));
+  }, []);
 
   const favoritos = useMemo(
     () =>
@@ -24,7 +25,7 @@ function Favoritos() {
       })),
     [favorito]
   );
-  //console.log(authenticationData)
+
   return (
     <div className="App">
       <header className="App-header">

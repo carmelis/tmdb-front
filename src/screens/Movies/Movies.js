@@ -4,9 +4,8 @@ import useGetMovies from "../../queries/useGetMovies";
 import { useEffect, useMemo } from "react";
 function Movies() {
   const { data, isLoading, isError } = useGetMovies();
-  console.log(data)
   const movies = useMemo(
-    () =>  
+    () =>
       data?.data?.results?.map((film) => ({
         title: film.title,
         description: film.overview,
@@ -14,7 +13,7 @@ function Movies() {
         original_language: "Idioma:" + film.original_language,
         popularity: "Popularidad:" + film.popularity,
         release_date: "Fecha de estreno" + film.release_date,
-        vote_average: "Voto promedio:" + film.vote_average
+        vote_average: "Voto promedio:" + film.vote_average,
       })),
     [data?.data]
   );

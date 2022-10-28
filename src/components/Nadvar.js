@@ -1,12 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthenticationData } from "../contexts/authentication";
-import useGetBuscador from "../queries/useGetBuscador";
-import Buscador from "../screens/Buscador/Buscador";
-import movies from "../screens/Movies/Movies";
 import "../styles/Nadvar.css";
-import { getBuscador } from "../services/buscador";
 
 const Navbar = () => {
   const { authenticationData, setAuthenticationData } = useAuthenticationData();
@@ -18,15 +13,13 @@ const Navbar = () => {
   };
 
   const handleSubmit = (evento) => {
-    evento.preventDefault()
-    //console.log("buscador", buscador);
+    evento.preventDefault();
     navigate(`/buscador/${buscador}`);
-  }
+  };
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-
           <div class="navbar-nav">
             <Link to="/movies">
               <a class="nav-link" href="">
@@ -60,7 +53,6 @@ const Navbar = () => {
             </form>
           </div>
 
-          {/* aca voy a ahcer un condicional que si el usuario existe, lo deje guardado y si no existe, diga Sign up*/}
 
           <div className="navbar-item navbar-end">
             {!!authenticationData ? (
@@ -75,12 +67,12 @@ const Navbar = () => {
               </>
             ) : (
               <>
-              <Link to="/login" className="button">
-                <strong>Sign up</strong>
-              </Link>
-              <Link to="/signin">
-              <strong>Sign in</strong>
-              </Link>
+                <Link to="/login" className="button">
+                  <strong>Sign up</strong>
+                </Link>
+                <Link to="/signin">
+                  <strong>Sign in</strong>
+                </Link>
               </>
             )}
           </div>

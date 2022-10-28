@@ -3,9 +3,8 @@ import Carousel from "../../components/Carousel";
 import useGetBuscador from "../../queries/useGetBuscador";
 import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import hanndleSubmit from "../../components/Nadvar"
 function Buscador(props) {
-  const params = useParams()
+  const params = useParams();
   const buscador2 = params.buscador;
 
   const { data } = useGetBuscador(buscador2);
@@ -17,13 +16,13 @@ function Buscador(props) {
         imageUrl: "https://www.themoviedb.org/t/p/original" + film.poster_path,
         original_language: "Idioma: " + film.original_language,
         popularity: "Popularidad: " + film.popularity,
-        vote_average: "Voto promedio: " + film.vote_average
+        vote_average: "Voto promedio: " + film.vote_average,
       })),
     [data?.data]
   );
   useEffect(() => {
-    console.log("data", data)
-  }, [data])
+    console.log("data", data);
+  }, [data]);
   return (
     <div className="App">
       <header className="App-header">
